@@ -9,7 +9,10 @@ import java.util.*
 // 4. immutable 객체는 방어적 복사본을 만들 필요가 없다.
 // 5. 다른 객체 (mutable, immutable)를 만들 때 활용하기 좋다, 실행을 더 쉽게 예측 할 수 있다.
 // 6. 세트 또는 맵의 키로 사용 할 수 있다. (mutable 객체는 사용 할 수 없음)
+data class FullName(val name: String,
+                    val surname: String) {
 
+}
 
 fun main() {
 
@@ -29,17 +32,22 @@ fun main() {
 
     var user = User("Maja", "Markiewicz")
     user = user.withSurname("Moskala")
-    print(user)
+    print(user.toString())
+
+    var user1 = User("Maja1", "Markiewicz1")
+    user1 = user1.copy(surname = "Moskala1")
+    print(user1)
 }
 
-class FullName(val name: String,
-               val surname: String) {
-}
+/**
+ * copy() 메서드를 활용하면 모든 기본 생성자 프로퍼티가 같은 새로운 개체를 만들 수 있다.
+ */
 
-class User(
-    private val name: String,
+data class User(
+    val name: String,
     val surname: String
 ){
     fun withSurname (surname: String) = User(name, surname)
+
 }
 
